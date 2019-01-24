@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--注解驱动-->
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
+
+    <!--开启aop，对类代理-->
+    <aop:config proxy-target-class="true"/>
+
+    <!--使用spring组件扫描，扫描controller-->
+    <context:component-scan base-package="cn.com.taiji.controller"/>
+
+    <!--配置内部资源视图解析器，要求将jstl的包放到classpath下-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--配置资源映射-->
+    <mvc:default-servlet-handler/>
+    <!--静态资源映射-->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js"/>
+    <mvc:resources mapping="/image/**" location="/WEB-INF/image"/>
+
+
+
+    <!--定义文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设定默认编码-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--设定文件上传的最大值-->
+        <property name="maxUploadSize" value="20971520"/>
+    </bean>
+
+    <!--定义统一的异常处理器-->
+    <bean class="cn.com.taiji.exception.CustomExceptionResolver"></bean>
+
+    <!--配置转换器-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="cn.com.taiji.controller.convertor.CustomDateConvertor"></bean>
+                <bean class="cn.com.taiji.controller.convertor.StringTrimConvertor"></bean>
+            </set>
+        </property>
+    </bean>
+
+    <!--配置校验器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!--校验器的实现-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!--指定校验使用的资源文件，如果不指定则默认使用classpath下的ValidationMessage.properties-->
+        <property name="validationMessageSource" ref="messageResource"/>
+    </bean>
+
+    <!--校验错误信息配置文件-->
+    <bean id="messageResource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!--配置资源文件名-->
+        <property name="basenames">
+            <list>
+                <value>CustomValidationMessage</value>
+            </list>
+        </property>
+        <!--资源文件编码格式 -->
+        <property name="fileEncodings" value="UTF-8"/>
+        <!--对资源文件内容的缓存时间，时间单位为秒-->
+        <property name="cacheSeconds" value="120"/>
+
+    </bean>
+
+</beans>
