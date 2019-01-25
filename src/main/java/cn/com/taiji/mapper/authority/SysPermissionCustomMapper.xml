@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.com.taiji.mapper.authority.SysPermissionCustomMapper">
+
+    <!--根据用户ID查询菜单-->
+    <select id="findMenuListByUserId" parameterType="String" resultType="cn.com.taiji.domain.authority.SysPermission">
+        SELECT *
+      from sys_permission
+      WHERE type = 'menu'
+	    AND id IN (
+		SELECT sys_permission_id
+		FROM sys_role_permission
+		WHERE	sys_role_id IN (
+			select sys_role_id
+			from sys_user_role
+			where sys_user_id = #{userid}
+		)
+	)
+    </select>
+
+    <!--根据用户Id查询url-->
+    <select id="findPermissionByUserId" parameterType="String" resultType="String">
+    SELECT sys_permission_id
+    from sys_role_permission
+    where sys_role_id IN (
+	SELECT sys_role_id
+	from sys_user_role
+	where sys_user_id = #{userid}
+)
+    </select>
+</mapper>
