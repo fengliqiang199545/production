@@ -1,5 +1,8 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class Material {
     /**
      *
@@ -8,6 +11,7 @@ public class Material {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String materialId;
 
     /**
@@ -17,6 +21,7 @@ public class Material {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=100, message="物料类型的长度限制在100个字符之内")
     private String materialType;
 
     /**
@@ -35,6 +40,7 @@ public class Material {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="剩余数量不能超过999999999")
     private Integer remaining;
 
     /**
@@ -44,6 +50,7 @@ public class Material {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     /**

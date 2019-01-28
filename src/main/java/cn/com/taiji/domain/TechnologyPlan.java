@@ -1,5 +1,7 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class TechnologyPlan {
@@ -10,6 +12,7 @@ public class TechnologyPlan {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 40 , message = "{id.length.error}")
     private String technologyPlanId;
 
     /**
@@ -28,6 +31,7 @@ public class TechnologyPlan {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value = 99999999 , message = "批次数量不能超过99999999")
     private Integer batchAmount;
 
     /**

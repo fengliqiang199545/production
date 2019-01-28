@@ -1,5 +1,7 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class MaterialReceive {
@@ -10,6 +12,7 @@ public class MaterialReceive {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 40 , message = "{id.length.error}")
     private String receiveId;
 
     /**
@@ -28,6 +31,7 @@ public class MaterialReceive {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="收入数量过大")
     private Integer amount;
 
     /**
@@ -46,6 +50,7 @@ public class MaterialReceive {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="发送者的长度限制在40个字符之内")
     private String sender;
 
     /**
@@ -55,6 +60,7 @@ public class MaterialReceive {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="接收者的长度限制在40个字符之内")
     private String receiver;
 
     /**
@@ -64,6 +70,7 @@ public class MaterialReceive {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     /**

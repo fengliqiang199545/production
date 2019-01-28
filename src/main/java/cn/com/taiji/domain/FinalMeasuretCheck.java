@@ -1,5 +1,6 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class FinalMeasuretCheck {
@@ -10,6 +11,7 @@ public class FinalMeasuretCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String fMeasureCheckId;
 
     /**
@@ -28,6 +30,7 @@ public class FinalMeasuretCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="检验项目的长度限制在40个字符之内")
     private String checkItem;
 
     /**
@@ -46,6 +49,7 @@ public class FinalMeasuretCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=2000, message="实际测量数据的长度限制在2000个字符之内")
     private String measureData;
 
     /**
@@ -64,6 +68,7 @@ public class FinalMeasuretCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=2000, message="校验结果的长度限制在2000个字符之内")
     private String result;
 
     /**
@@ -73,6 +78,7 @@ public class FinalMeasuretCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     /**

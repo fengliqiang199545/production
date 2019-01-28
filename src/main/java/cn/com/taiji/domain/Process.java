@@ -1,5 +1,8 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class Process {
     /**
      *
@@ -8,6 +11,7 @@ public class Process {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String processId;
 
     /**
@@ -26,6 +30,7 @@ public class Process {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="工序顺序不能超过999999999")
     private Integer sequence;
 
     /**
@@ -35,6 +40,7 @@ public class Process {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="单件定额工时不能超过999999999")
     private Integer quota;
 
     /**

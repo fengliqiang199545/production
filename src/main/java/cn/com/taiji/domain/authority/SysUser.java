@@ -1,5 +1,7 @@
 package cn.com.taiji.domain.authority;
 
+import javax.validation.constraints.Size;
+
 public class SysUser {
     /**
      *
@@ -8,6 +10,7 @@ public class SysUser {
      *
      * @mbg.generated Fri Jan 25 12:43:56 CST 2019
      */
+    @Size(max=36, message="用户编号过长！")
     private String id;
 
     /**
@@ -17,6 +20,7 @@ public class SysUser {
      *
      * @mbg.generated Fri Jan 25 12:43:56 CST 2019
      */
+    @Size(max=64, message="用户名过长！")
     private String username;
 
     /**
@@ -26,6 +30,7 @@ public class SysUser {
      *
      * @mbg.generated Fri Jan 25 12:43:56 CST 2019
      */
+    @Size(max=32, message="密码过长！")
     private String password;
 
     /**
@@ -35,6 +40,7 @@ public class SysUser {
      *
      * @mbg.generated Fri Jan 25 12:43:56 CST 2019
      */
+    @Size(max=1, message="用户状态输入非法！")
     private String locked;
 
     /**

@@ -1,5 +1,6 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class TechnologyRequirement {
@@ -10,6 +11,7 @@ public class TechnologyRequirement {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String technologyRequirementId;
 
     /**
@@ -28,6 +30,7 @@ public class TechnologyRequirement {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=2000, message="工艺要求的长度限制在2000个字符之内")
     private String requirement;
 
     /**

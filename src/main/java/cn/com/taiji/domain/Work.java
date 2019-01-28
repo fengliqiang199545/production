@@ -1,5 +1,7 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Size;
+
 public class Work {
     /**
      *
@@ -8,6 +10,7 @@ public class Work {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String workId;
 
     /**
@@ -17,6 +20,7 @@ public class Work {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="工序号的长度限制在40个字符之内")
     private String processNumber;
 
     /**
@@ -26,6 +30,7 @@ public class Work {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String productId;
 
     /**
@@ -35,6 +40,7 @@ public class Work {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String processId;
 
     /**
@@ -44,6 +50,7 @@ public class Work {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String deviceId;
 
     /**

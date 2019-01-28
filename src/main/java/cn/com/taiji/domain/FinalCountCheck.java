@@ -1,5 +1,8 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,6 +14,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String fCountCheckId;
 
     /**
@@ -29,6 +33,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="检验项目的长度限制在40个字符之内")
     private String checkItem;
 
     /**
@@ -38,6 +43,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="样本总数不能超过999999999")
     private Integer sample;
 
     /**
@@ -47,6 +53,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="抽检数不能超过999999999")
     private Integer checkNumber;
 
     /**
@@ -56,6 +63,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="不合格数不能超过999999999")
     private Integer unqualify;
 
     /**
@@ -65,6 +73,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Digits(integer=1, fraction=2, message="数据不合法，请输入类似“0.80”")
     private BigDecimal qualify;
 
     /**
@@ -83,6 +92,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=2000, message="实际测量数据的长度限制在2000个字符之内")
     private String measureData;
 
     /**
@@ -101,6 +111,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=2000, message="校验结果的长度限制在2000个字符之内")
     private String result;
 
     /**
@@ -110,6 +121,7 @@ public class FinalCountCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 5000 , message = "{note.length.error}")
     private String note;
 
     /**

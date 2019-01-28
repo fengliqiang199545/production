@@ -1,5 +1,6 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class DeviceFault {
@@ -10,6 +11,7 @@ public class DeviceFault {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 40 , message = "{id.length.error}")
     private String deviceFaultId;
 
     /**
@@ -28,6 +30,7 @@ public class DeviceFault {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 100 , message = "故障原因请控制在100字以内")
     private String deviceFaultCause;
 
     /**
@@ -37,6 +40,7 @@ public class DeviceFault {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 5000 , message = "故障描述请控制在5000字以内")
     private String deviceFaultDetail;
 
     /**
@@ -55,6 +59,7 @@ public class DeviceFault {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 500 , message = "维修方式描述请控制在500个字符以内")
     private String deviceFaultMaintenance;
 
     /**

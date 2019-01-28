@@ -1,5 +1,6 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class DeviceCheck {
@@ -10,6 +11,7 @@ public class DeviceCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 40 , message = "{id.length.error}")
     private String deviceCheckId;
 
     /**
@@ -46,6 +48,7 @@ public class DeviceCheck {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 5000 , message = "{检验长度请控制在5000字以内}")
     private String deviceCheckResult;
 
     /**

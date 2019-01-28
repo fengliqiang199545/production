@@ -1,5 +1,7 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class DeviceType {
@@ -10,6 +12,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 40 , message = "{id.length.error}")
     private String deviceTypeId;
 
     /**
@@ -19,6 +22,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 100 , message = "{name.length.error}")
     private String deviceTypeName;
 
     /**
@@ -28,6 +32,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 200 , message = "型号的长度限制在200个字符以内")
     private String deviceTypeModel;
 
     /**
@@ -37,6 +42,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max = 200 , message = "规格的长度控制在200个字符以内")
     private String deviceTypeSpec;
 
     /**
@@ -46,6 +52,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=100, message="供应商的长度限制在200个字符之内")
     private String deviceTypeSupplier;
 
     /**
@@ -55,6 +62,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=100, message="生产商的长度限制在200个字符之内")
     private String deviceTypeProducer;
 
     /**
@@ -64,6 +72,7 @@ public class DeviceType {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="台数的长度限制在10个字符之内")
     private Integer deviceTypeQuantity;
 
     /**

@@ -1,5 +1,7 @@
 package cn.com.taiji.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Manufacture {
@@ -10,6 +12,7 @@ public class Manufacture {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Size(max=40, message="{id.length.error}")
     private String manufactureSn;
 
     /**
@@ -37,6 +40,7 @@ public class Manufacture {
      *
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
+    @Max(value=999999999, message="投产数量过大")
     private Integer launchQuantity;
 
     /**
