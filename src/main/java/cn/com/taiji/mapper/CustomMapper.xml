@@ -18,6 +18,53 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+
+  <!--自定义mapper接口的实现-->
+  <!--批量删除-->
+  <delete id="deleteBatch">
+    delete
+    from custom
+    where custom_id in
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+  <!--更新客户资料-->
+  <update id="updateNote" parameterType="cn.com.taiji.domain.Custom">
+    update custom
+    set
+    note = #{note}
+
+    where custom_id = #{customId,jdbcType=VARCHAR}
+  </update>
+
+  <!--批量改变用户状态-->
+  <update id="changeStatus">
+      update custom
+      set status = 1
+      where custom_id in
+      <foreach collection="array" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+  </update>
+
+  <!--   -->
+  <select id="searchCustomByCustomName" parameterType="string" resultMap="BaseResultMap">
+    select *
+    from custom
+    where custom_name like
+    concat('%',#{customName},'%')
+  </select>
+
+  <select id="searchCustomByCustomId" parameterType="string" resultMap="BaseResultMap">
+      select *
+      from custom
+      where custom_id like
+      concat('%',#{customId},'%')
+  </select>
+
+  <!--mybatis-generator自动生成的mapper实现-->
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated

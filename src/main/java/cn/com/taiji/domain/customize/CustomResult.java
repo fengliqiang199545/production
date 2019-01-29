@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
+import java.util.List;
 
 public class CustomResult {
 
@@ -41,6 +42,10 @@ public class CustomResult {
 
     public static CustomResult ok(Object data){return new CustomResult(data);}
     public static CustomResult ok(){return new CustomResult(null);}
+
+    public static CustomResult build(int i, String s) {
+        return new CustomResult(i,s,null);
+    }
 
     public Integer getStatus() {
         return status;
@@ -111,20 +116,34 @@ public class CustomResult {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "CustomResult{" +
+                "status=" + status +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
 
     /*
-    *   json - object 集合转化
+    *  当object为集合时的处理
     * */
-//    public static CustomResult formatToList(String jsondata, Class<?>clazz){
-//        return null;
-//
-//        JsonNode jsonNode =  MAPPER.readTree(jsondata);
-//
-//        JsonNode data = jsonNode.get("data");
-//        Object obj = null;
-//
-//        if ( data.isArray() && data.size()>0){
-//            MAPPER.
-//        }
-//    }
+
+
+
+    public static CustomResult formatToList(String jsonData , Class<?>clazz){
+        try {
+            JsonNode jsonNode =  MAPPER.readTree(jsonData);
+            JsonNode data =  jsonNode.get("data");
+            Object obj = null;
+            if (data.isArray() && data.size()>0){
+                obj =  MAPPER.readValues(data.traverse(),MAPPER.getTypeFactory().constructCollectionType(List.class,clazz));
+            }
+            return build(jsonNode.get("status").intValue(),jsonNode.get("msg").asText(),obj);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
