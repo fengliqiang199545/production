@@ -11,6 +11,47 @@
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+  <!--自定义mapper接口的实现-->
+  <!--批量删除-->
+  <delete id="deleteBatch">
+    delete
+    from department
+    where department_id in
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+  <!--更新备注说明-->
+  <update id="updateNote" parameterType="cn.com.taiji.domain.Department">
+    update department
+    set note = #{note}
+    where department_id = #{departmentId}
+  </update>
+
+  <select id="searchDepartmentByDepartmentId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			department
+		WHERE
+			department_id LIKE CONCAT(
+				'%',
+				#{departmentId},'%' )
+	</select>
+
+  <select id="searchDepartmentByDepartmentName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			department
+		WHERE
+			department_name LIKE CONCAT(
+				'%',
+				#{departmentName},'%' )
+	</select>
+
+
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated

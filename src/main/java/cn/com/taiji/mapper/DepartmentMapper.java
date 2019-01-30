@@ -93,4 +93,21 @@ public interface DepartmentMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(Department record);
+
+    /*
+    *   自定义mapper接口
+    * */
+    /*
+       批量删除
+     */
+    int deleteBatch(String[] ids);
+
+    //更新备注
+    int updateNote(Department department);
+
+    //暂时完全不明白这个接口的意义在哪里，departmentId是department的主键，通过主键找到得到实体的方法
+    //已经有了，而且这个方法的返回值只有可能是一个实体类，不可能存在多个对象
+    List<Department> searchDepartmentByDepartmentId(String departmentId);
+
+    List<Department> searchDepartmentByDepartmentName(String departmentName);
 }

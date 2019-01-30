@@ -93,4 +93,17 @@ public interface DeviceCheckMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(DeviceCheck record);
+
+    //扩展的mapper接口方法
+    List<DeviceCheck> find(DeviceCheck deviceCheck);
+
+    int deleteBatch(String[] deviceCheckIds);
+
+    //根据设备id查找设备例检信息
+    List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String deviceCheckId);
+
+    //根据设备名称查找设备例检信息
+    List<DeviceCheck> searchDeviceCheckByDeviceName(String deviceName);
+
+    int updateNote(DeviceCheck deviceCheck);
 }

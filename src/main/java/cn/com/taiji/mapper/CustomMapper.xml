@@ -35,7 +35,6 @@
     update custom
     set
     note = #{note}
-
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
 
