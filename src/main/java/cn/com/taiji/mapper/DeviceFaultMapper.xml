@@ -14,6 +14,31 @@
     <result column="device_fault_date" jdbcType="TIMESTAMP" property="deviceFaultDate" />
     <result column="device_fault_maintenance" jdbcType="VARCHAR" property="deviceFaultMaintenance" />
   </resultMap>
+
+  <resultMap id="customResultMap" type="cn.com.taiji.domain.vo.DeviceFaultVO" extends="BaseResultMap">
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+
+  <select id="find" parameterType="cn.com.taiji.domain.DeviceFault" resultMap="customResultMap">
+    select device_fault_id,
+            device_fault.device_id,
+            device_name,
+            device_fault_cause,
+			device_fault_detail,
+			device_fault_date,
+			device_fault_maintenance
+	from device_fault,device
+	where device_fault.device_id = device.device_id
+  </select>
+
+
+  <select id="getData" resultMap="customResultMap">
+    select *
+    from device_fault
+  </select>
+
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated

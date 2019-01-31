@@ -3,6 +3,8 @@ package cn.com.taiji.mapper;
 import cn.com.taiji.domain.DeviceFault;
 import cn.com.taiji.domain.DeviceFaultExample;
 import java.util.List;
+
+import cn.com.taiji.domain.vo.DeviceFaultVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface DeviceFaultMapper {
@@ -93,4 +95,20 @@ public interface DeviceFaultMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(DeviceFault record);
+
+    /*
+    *   用户自定义mapper接口
+    * */
+
+    List<DeviceFaultVO> find(DeviceFault deviceFault);
+
+    List<DeviceFault> getData();
+
+    int deleteBatch(String[] deviceFaultIds);
+
+    int updateNote(DeviceFault deviceFault);
+
+    List<DeviceFault> searchDeviceFaultByDeviceFaultId(String deviceFaultId);
+
+    List<DeviceFault> searchDeviceFaultByDeviceName(String deviceName);
 }

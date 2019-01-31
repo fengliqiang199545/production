@@ -15,6 +15,11 @@
     <result column="device_check_fault_id" jdbcType="VARCHAR" property="deviceCheckFaultId" />
   </resultMap>
 
+
+  <resultMap id="AddResultMap" type="cn.com.taiji.domain.vo.DeviceCheckVO" extends="BaseResultMap">
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_check_emp" property="deviceCheckEmp" jdbcType="VARCHAR" />
+  </resultMap>
   <!-- 扩展的sql -->
   <!-- 查询所有记录 -->
   <select id="find" parameterType="deviceCheck" resultMap="AddResultMap">
@@ -51,7 +56,7 @@
   </delete>
 
   <!-- 修改备注-->
-  <update id="updateNote" parameterType="com.megagao.production.ssm.domain.DeviceCheck" >
+  <update id="updateNote" parameterType="cn.com.taiji.domain.DeviceCheck" >
 		UPDATE device_check
 		SET device_check_result = #{deviceCheckResult}
 		WHERE

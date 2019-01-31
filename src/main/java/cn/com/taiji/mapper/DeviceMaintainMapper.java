@@ -93,4 +93,17 @@ public interface DeviceMaintainMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(DeviceMaintain record);
+
+    //扩展的mapper接口方法
+    List<DeviceMaintain> find(DeviceMaintain deviceMaintain);
+
+    int updateNote(DeviceMaintain deviceMaintain);
+
+    int deleteBatch(String[] DeviceMaintainIds);
+
+    //根据设备维修id查找设备维修信息
+    List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(String deviceMaintainId);
+
+    //根据设备故障id查找设备维修信息
+    List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String deviceFaultId);
 }

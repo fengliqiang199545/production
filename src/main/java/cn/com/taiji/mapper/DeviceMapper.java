@@ -93,4 +93,18 @@ public interface DeviceMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(Device record);
+
+    List<Device> find(Device device);
+
+    List<Device> getData();
+
+    int deleteBatch(String[] deviceIds);
+
+    int updateNote(Device device);
+
+    List<Device> searchDeviceByDeviceId(String deviceId);
+
+    List<Device> searchDeviceByDeviceName(String deviceName);
+
+    List<Device> searchDeviceByDeviceTypeName(String deviceTypeName);
 }

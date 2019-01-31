@@ -19,6 +19,8 @@
     <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+
+
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
