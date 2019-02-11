@@ -3,6 +3,8 @@ package cn.com.taiji.mapper;
 import cn.com.taiji.domain.Employee;
 import cn.com.taiji.domain.EmployeeExample;
 import java.util.List;
+
+import cn.com.taiji.domain.vo.EmployeeVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface EmployeeMapper {
@@ -93,4 +95,18 @@ public interface EmployeeMapper {
      * @mbg.generated Mon Jan 28 09:51:23 CST 2019
      */
     int updateByPrimaryKey(Employee record);
+
+    //自定义mapper接口
+
+    EmployeeVO selectSingleEmployee(String empId);
+
+    List<EmployeeVO> find();
+
+    int deleteBatch(String[] ids);
+
+    List<EmployeeVO> searchEmployeeByEmployeeId(String employeeId);
+
+    List<EmployeeVO> searchEmployeeByEmployeeName(String employeeName);
+
+    List<EmployeeVO> searchEmployeeByDepartmentName(String departmentName);
 }

@@ -3,6 +3,8 @@ package cn.com.taiji.mapper;
 import cn.com.taiji.domain.FinalCountCheck;
 import cn.com.taiji.domain.FinalCountCheckExample;
 import java.util.List;
+
+import cn.com.taiji.domain.vo.FinalCountCheckVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface FinalCountCheckMapper {
@@ -93,4 +95,17 @@ public interface FinalCountCheckMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(FinalCountCheck record);
+    
+    
+    //===============================================//
+
+    List<FinalCountCheckVO> find(FinalCountCheck finalCountCheck);
+
+    int deleteBatch(String[] ids);
+
+    int updateNote(FinalCountCheck finalCountCheck);
+
+    List<FinalCountCheckVO> searchFCountCheckByFCountCheckId(String fCountCheckId);
+
+    List<FinalCountCheckVO> searchFCountCheckByOrderId(String orderId);
 }

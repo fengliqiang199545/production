@@ -94,6 +94,8 @@ public interface DeviceMapper {
      */
     int updateByPrimaryKey(Device record);
 
+//    自定义mapper接口
+
     List<Device> find(Device device);
 
     List<Device> getData();

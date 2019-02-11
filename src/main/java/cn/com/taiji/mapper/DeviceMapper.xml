@@ -20,7 +20,140 @@
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
 
+  <!--扩展resulteMap-->
+  <resultMap id="AddResultMap" type="cn.com.taiji.domain.vo.DeviceVO" extends="BaseResultMap">
+    <result column="device_type_name" jdbcType="VARCHAR" property="deviceTypeName"/>
+    <result column="device_keeper" property="deviceKeeper" jdbcType="VARCHAR"/>
+  </resultMap>
 
+  <!--自定义mapper接口的实现-->
+  <!--批量删除-->
+  <delete id="deleteBatch">
+    delete
+    from device
+    where device_id in
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+  <!--查询所有的记录，使用扩展的resultMap接受结果-->
+  <select id="find" parameterType="device" resultMap="AddResultMap">
+    select
+    device_id,
+    device_name,
+    device.device_type_id,
+    device_type_name,
+    device_status_id,
+    device_purchase_date,
+    device_purchase_price,
+    device_manufacture_date,
+    device_service_life,
+    device_keeper_id,
+    emp_name as device_keeper,
+    note
+    from
+    device,
+    device_type,
+    employee
+    where
+    device.device_type_id = device_type.device_type_id
+		AND device.device_keeper_id = employee.emp_id
+	order by device_id asc
+  </select>
+
+  <!--查询所有记录-->
+  <select id="getData" resultMap="BaseResultMap">
+    select
+    device_id,
+    device_name
+    from device
+  </select>
+
+  <!--更新备注-->
+  <update id="updateNote" parameterType="cn.com.taiji.domain.Device">
+    update device
+    set note = #{note}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+
+  <!--根据设备id模糊查找设备-->
+  <select id="searchDeviceByDeviceId" parameterType="string" resultMap="AddResultMap">
+    SELECT
+			device_id,
+			device_name,
+			device.device_type_id,
+			device_type_name,
+			device_status_id,
+			device_purchase_date,
+			device_purchase_price,
+			device_manufacture_date,
+			device_service_life,
+			device_keeper_id,
+			emp_name as device_keeper,
+			note
+		FROM
+			device,
+			device_type,
+			employee
+		WHERE
+			device.device_type_id = device_type.device_type_id
+		AND device.device_keeper_id = employee.emp_id
+		AND device_id like concat('%', #{deviceId} ,'%' )
+  </select>
+
+  <!--根据设备名称模糊查询记录-->
+  <select id="searchDeviceByDeviceName" parameterType="string" resultMap="AddResultMap">
+    SELECT
+			device_id,
+			device_name,
+			device.device_type_id,
+			device_type_name,
+			device_status_id,
+			device_purchase_date,
+			device_purchase_price,
+			device_manufacture_date,
+			device_service_life,
+			device_keeper_id,
+			emp_name as device_keeper,
+			note
+		FROM
+			device,
+			device_type,
+			employee
+		WHERE
+			device.device_type_id = device_type.device_type_id
+		AND device.device_keeper_id = employee.emp_id
+		AND device_name like concat('%',#{deviceName},'%')
+  </select>
+
+  <!--根据设备的类型查找设备记录-->
+  <select id="searchDeviceByDeviceTypeName" parameterType="string" resultMap="AddResultMap">
+     SELECT
+			device_id,
+			device_name,
+			device.device_type_id,
+			device_type_name,
+			device_status_id,
+			device_purchase_date,
+			device_purchase_price,
+			device_manufacture_date,
+			device_service_life,
+			device_keeper_id,
+			emp_name as device_keeper,
+			note
+		FROM
+			device,
+			device_type,
+			employee
+		WHERE
+			device.device_type_id = device_type.device_type_id
+		AND device.device_keeper_id = employee.emp_id
+		AND device_type_name like concat('%',#{deviceTypeName},'%')
+  </select>
+
+
+  <!--mybatis 自动生成的mapper接口的实现-->
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated

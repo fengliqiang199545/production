@@ -93,4 +93,21 @@ public interface DeviceTypeMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(DeviceType record);
+
+    //自定义的扩展方法
+
+    //查找所有设备类型的记录，全字段且有扩展
+    List<DeviceType> find(DeviceType deviceType);
+
+    //简单查询所有设备的记录
+    List<DeviceType> listType();
+
+    //批量删除设备种类信息
+    int deleteBatch(String[] ids);
+
+    //根据deviceTypeId进行模糊查询的mapper接口
+    List<DeviceType> searchDeviceTypeByDeviceTypeId(String deviceTypeId);
+
+    //根据设备的名称进行模糊查询
+    List<DeviceType> searchDeviceTypeByDeviceTypeName(String deviceTypeName);
 }
