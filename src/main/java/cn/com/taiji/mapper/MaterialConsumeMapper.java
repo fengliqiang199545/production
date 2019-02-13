@@ -3,6 +3,8 @@ package cn.com.taiji.mapper;
 import cn.com.taiji.domain.MaterialConsume;
 import cn.com.taiji.domain.MaterialConsumeExample;
 import java.util.List;
+
+import cn.com.taiji.domain.vo.MaterialConsumeVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface MaterialConsumeMapper {
@@ -93,4 +95,18 @@ public interface MaterialConsumeMapper {
      * @mbg.generated Fri Jan 25 11:46:10 CST 2019
      */
     int updateByPrimaryKey(MaterialConsume record);
+
+    //扩展的mapper接口方法
+    int deleteBatch(String[] ids);
+
+    int updateNote(MaterialConsume materialConsume);
+
+    List<MaterialConsumeVO> find(MaterialConsumeVO materialConsume);
+
+    List<MaterialConsumeVO> searchMaterialConsumeByConsumeId(String consumeId);
+
+    List<MaterialConsumeVO> searchMaterialConsumeByMaterialId(String materialId);
+
+    List<MaterialConsumeVO> searchMaterialConsumeByWorkId(String workId);
+
 }
