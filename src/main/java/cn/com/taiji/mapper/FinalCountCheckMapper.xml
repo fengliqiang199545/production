@@ -22,7 +22,7 @@
   </resultMap>
 
   <resultMap id="AddResultMap" type="cn.com.taiji.domain.vo.FinalCountCheckVO" extends="BaseResultMap">
-    <result column="emp_name"property="empName" jdbcType="VARCHAR"/>
+    <result column="emp_name" property="empName" jdbcType="VARCHAR"/>
   </resultMap>
 
 

@@ -22,6 +22,220 @@
 
 </head>
 <body>
+    <div class="main">
+        <div class="header hide">管理系统</div>
+        <div class="content">
+            <div class="title hide">管理系统登录</div>
+            <form action="#" name="login" method="post">
+                <fieldset>
+                    <%--USERNAME--%>
+                    <div>
+                        <div class="input">
+                            <input type="text" class="input_all name" name="name" id="username"
+                                   placeholder="用户名"  onfocus="this.className='input_all name_now';"
+                                   onblur="this.className='input_all name'" maxlength="24"
+                            />
+                        </div>
+                        <div id="username_span" style="display:none;padding-bottom: 7px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="userspan"></span>
+                        </div>
+                    </div>
 
+                        <%--PASSWORD--%>
+                    <div>
+                        <div class="input">
+                            <input type="password" class="input_all password" name="password" id="password"
+                            placeholder="密码" onfocus="this.className='input_all password_now';"
+                                   onblur="this.className='input_all password'" maxlength="24"
+                            />
+                            <div id="password_span" style="display:none;margin:0 0 0 0 ;padding: 0 0 0 0 ;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="passwordspan"></span>
+                            </div>
+
+                            <div style="margin-botton:12px">
+                                <div id="randiv" style="display:none;margin-left: 98px;">
+                                    验证码：<input id="randomcode" name="randomcode" size="8">
+                                    <img src="${baseurl}validatecode.jsp" alt="" id="randomcode_img"
+                                         width="56" height="20" align="absMiddle">
+                                    <a href="javascript:randomcode_refresh()">刷新</a>
+                                </div>
+                                <div style="margin-left: 98px;">
+                                    <span id="randomcode_span"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%--REMEMBER ME--%>
+                    <div class="check-box">
+                        <input type="checkbox" name="remember" id="remember" checked="checked">
+                        <label for="remember">
+                            <span>记住密码</span>
+                        </label>
+                        <span id="errorspan"style="margin-left: 88px;"></span>
+                    </div>
+
+                    <div>
+                        <a href="#" id="login" class="button hide">登录</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+<script type="text/javascript" src="js/login/placeholder.js"></script>
+<script type="text/javascript">
+    $("login")
+        .click(
+            function(){
+                var uname = $("#username");
+                var pwd = $("#password");
+                var display = $("#randiv").css('display');
+                var rcode = $("#randomcode");
+
+                if (display == 'none'){
+                    //当用户名为空时的情况处理
+                    if ($.trim(uname.val() == "")){
+                        $("#username_span").css('display','block');
+                        $("#password_span").html("");
+                        $("#userspan").html("<font color='red'>用户名不能为空<font/>");
+                        uname.focus();
+                    }
+                    //当密码为空时的情况处理
+                    else if($.trim(pwd.val()) == "" ){
+                        $("#username_span").css('display','none');
+                        $("#password_span").css('display','block');
+                        $("#userspan").html("");
+                        $("#passwordspan").html("<font color='red'>密码不能为空<font/>");
+                        pwd.focus();
+                    }
+                    //用户名和密码都不为空的情况，没有异常情况
+                    else {
+                        $("#password_span").css('display','none');
+                        $("#userspan").html("");
+                        $("#passwordspan").html("");
+
+                        $
+                            .ajax({
+                                url: "${baseurl}ajaxLogin",//跳转到action
+                                data: {
+                                    username: uname.val(),
+                                    password: pwd.val(),
+                                },
+                                type : "post",
+                                cache: false,
+                                dataType: "json",
+                                success:function (data) {
+                                    if (data.msg == "account_error"){
+                                        console.log("account error!");
+                                        $("#errorspan").html("<font color='red'>用戶不存在<font/>")
+                                        rcode_flag = 1;
+                                        $("#randiv").show();
+                                    }
+                                    else if (data.mes =="password_error"){
+                                        $("#errorspan").html("<font color='red'>密码错误<font/>");
+                                        rcode_flag = 1;
+                                        $("#randiv").show();
+                                    }else if (data.msg == 'authentication_error') {
+                                        $("#errorspan")
+                                            .html(
+                                                "<font color='red'> 您没有授权！</font>");
+                                        rcode_flag = 1;
+                                        $("#randiv").show();
+                                    }else {
+                                        location.href = "${baseurl}home";
+                                    }
+                                },
+                                error : function () {
+                                    //异常
+                                    alert("异常！！")
+                                }
+                            });
+                    }
+                }
+                else {
+                    $("#errorspan").html("");
+                    if ($.trim(uname.val()) == "") {
+                        $("#passwordspan").html("");
+                        $("#userspan")
+                            .html(
+                                "<font color='red'>用户名不能为空！</font>");
+                        uname.focus();
+                    } else if ($.trim(pwd.val()) == "") {
+                        $("#userspan").html("");
+                        $("#passwordspan").html(
+                            "<font color='red'>密码不能为空！</font>");
+                        pwd.focus();
+                    } else if ($.trim(rcode.val()) == "") {
+                        $("#userspan").html("");
+                        $("#randomcode_span")
+                            .html(
+                                "<font color='red'>验证码不能为空！</font>");
+                        rcode.focus();
+                    } else {
+                        $("#userspan").html("");
+                        $("#passwordspan").html("");
+                        $("#randomcode_span").html("");
+                        $
+                            .ajax({
+                                url : '${baseurl}ajaxLogin',// 跳转到 action  
+                                data : {
+                                    username : uname.val(),
+                                    password : pwd.val(),
+                                    randomcode : rcode.val(),
+                                },
+                                type : 'post',
+                                cache : false,
+                                dataType : 'json',
+                                success : function(data) {
+                                    if (data.msg == 'account_error') {
+                                        $("#errorspan")
+                                            .html(
+                                                "<font color='red'> 用户不存在！</font>");
+                                        rcode_flag = true;
+                                        randomcode_refresh();
+                                    } else if (data.msg == 'password_error') {
+                                        $("#errorspan")
+                                            .html(
+                                                "<font color='red'> 密码错误！</font>");
+                                        rcode_flag = true;
+                                        randomcode_refresh();
+                                    } else if (data.msg == 'randomcode_error') {
+                                        $("#errorspan")
+                                            .html(
+                                                "<font color='red'> 验证码错误！</font>");
+                                        rcode_flag = true;
+                                        randomcode_refresh();
+                                    } else if (data.msg == 'authentication_error') {
+                                        $("#errorspan")
+                                            .html(
+                                                "<font color='red'> 您没有授权！</font>");
+                                        rcode_flag = true;
+                                        randomcode_refresh();
+                                    } else {
+                                        location.href = "${baseurl}home";
+                                    }
+                                },
+                                error : function() {
+                                    // view("异常！");  
+                                    alert("异常！");
+                                }
+                            });
+                    }
+                }
+            }
+    );
+    
+    /*
+    *   刷新验证码
+    *   实现思路：重新给图片的src赋值，后边加时间，防止缓存
+    * */
+    function randomcode_refresh() {
+        $("#randomcode_img").attr("src","${baseurl}validatecode.jsp?time" + new Date().getTime());
+    }
+</script>
+    <script type="text/javascript" src="js/login/belatedpng"></script>
+    <script type="text/javascript">
+        DD_belatedPNG.fix("*");
+    </script>
 </body>
 </html>
